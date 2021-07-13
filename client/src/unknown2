@@ -1,0 +1,195 @@
+        if(image=== ''){
+           errors.push({msg:'image is required'})
+       }
+        if(name=== ''){
+           errors.push({msg:'name is required'})
+       }
+        if(email=== ''){
+           errors.push({msg:'email is required'})
+       }
+        if(phone=== ''){
+           errors.push({msg:'phone is required'})
+       }
+        if(age=== ''){
+           errors.push({msg:'age is required'})
+       }
+        if(address=== ''){
+           errors.push({msg:'address is required'})
+       }
+        if(city=== ''){
+           errors.push({msg:'city is required'})
+       }
+        if(state=== ''){
+           errors.push({msg:'state is required'})
+       }
+        if(zipcode=== ''){
+           errors.push({msg:'zipcode is required'})
+       }
+        if(hobby=== ''){
+           errors.push({msg:'hobby is required'})
+       }
+        if(school_name=== ''){
+           errors.push({msg:'school_name is required'})
+       }
+        if(subject_name=== ''){
+           errors.push({msg:'subject_name is required'})
+       }
+        if(passing_year=== ''){
+           errors.push({msg:'passing_year is required'})
+       }
+        if(school_aggregate=== ''){
+           errors.push({msg:'school_aggregate is required'})
+       }
+        if(college_name=== ''){
+           errors.push({msg:'college_name is required'})
+       }
+        if(college_course=== ''){
+           errors.push({msg:'college_course is required'})
+       }
+        if(college_branch=== ''){
+           errors.push({msg:'college_branch is required'})
+       }
+        if(college_passing_year=== ''){
+           errors.push({msg:'college_passing_year is required'})
+       }
+        if(college_aggregate=== ''){
+           errors.push({msg:'college_aggregate is required'})
+       }
+        if(Degree_college_name=== ''){
+           errors.push({msg:'Degree_college_name is required'})
+       }
+        if(Degree_college_course=== ''){
+           errors.push({msg:'Degree_college_course is required'})
+       }
+        if(Degree_college_branch=== ''){
+           errors.push({msg:'Degree_college_branch is required'})
+       }
+        if(Degree_college_passing_year=== ''){
+           errors.push({msg:'Degree_college_passing_year is required'})
+       }
+        if(Degree_college_aggregate=== ''){
+           errors.push({msg:'Degree_college_aggregate is required'})
+       }
+        if(Instiute_name=== ''){
+           errors.push({msg:'Instiute_name is required'})
+       }
+        if(Instiute_course=== ''){
+           errors.push({msg:'Instiute_course is required'})
+       }
+        if(Instiute_branch=== ''){
+           errors.push({msg:'Instiute_branch is required'})
+       }
+        if(Instiute_passing_year=== ''){
+           errors.push({msg:'Instiute_passing_year is required'})
+       }
+        if(Instiute_aggregate=== ''){
+           errors.push({msg:'Instiute_aggregate is required'})
+       }
+        if(first_project_name=== ''){
+           errors.push({msg:'first_project_name is required'})
+       }
+        if(first_project_start_date=== ''){
+           errors.push({msg:'first_project_start_date is required'})
+       }
+        if(first_project_end_date=== ''){
+           errors.push({msg:'first_project_end_date is required'})
+       }
+        if(first_project_desription=== ''){
+           errors.push({msg:'first_project_desription is required'})
+       }
+        if(first_project_key_technologies=== ''){
+           errors.push({msg:'first_project_key_technologies is required'})
+       }
+        if(second_project_name=== ''){
+           errors.push({msg:'second_project_name is required'})
+       }
+        if(second_project_start_date=== ''){
+           errors.push({msg:'second_project_start_date is required'})
+       }
+        if(second_project_end_date=== ''){
+           errors.push({msg:'second_project_end_date is required'})
+       }
+        if(second_project_desription=== ''){
+           errors.push({msg:'second_project_desription is required'})
+       }
+        if(second_project_key_technologies=== ''){
+           errors.push({msg:'second_project_key_technologies is required'})
+       }
+        if(third_project_name=== ''){
+           errors.push({msg:'third_project_name is required'})
+       }
+        if(third_project_start_date=== ''){
+           errors.push({msg:'third_project_start_date is required'})
+       }
+        if(third_project_end_date=== ''){
+           errors.push({msg:'third_project_end_date is required'})
+       }
+        if(third_project_desription=== ''){
+           errors.push({msg:'third_project_desription is required'})
+       }
+        if(third_project_key_technologies=== ''){
+           errors.push({msg:'third_project_key_technologies is required'})
+       }
+        if(fourth_project_name=== ''){
+           errors.push({msg:'fourth_project_name is required'})
+       }
+        if(fourth_project_start_date=== ''){
+           errors.push({msg:'fourth_project_start_date is required'})
+       }
+        if(fourth_project_end_date=== ''){
+           errors.push({msg:'fourth_project_end_date is required'})
+       }
+        if(fourth_project_desription=== ''){
+           errors.push({msg:'fourth_project_desription is required'})
+       }
+        if(fourth_project_key_technologies=== ''){
+           errors.push({msg:'fourth_project_key_technologies is required'})
+       }
+        if(skill_1=== ''){
+           errors.push({msg:'skill_1 is required'})
+       }
+        if(skill_1_percentage=== ''){
+           errors.push({msg:'skill_1_percentage is required'})
+       }
+        if(skill_2=== ''){
+           errors.push({msg:'skill_2 is required'})
+       }
+        if(skill_2_percentage=== ''){
+           errors.push({msg:'skill_2_percentage is required'})
+       }
+        if(skill_3=== ''){
+           errors.push({msg:'skill_3 is required'})
+       }
+        if(skill_3_percentage=== ''){
+           errors.push({msg:'skill_3_percentage is required'})
+       }
+        if(skill_4=== ''){
+           errors.push({msg:'skill_4 is required'})
+       }
+        if(skill_4_percentage=== ''){
+           errors.push({msg:'skill_4_percentage is required'})
+       }
+        if(skill_5=== ''){
+           errors.push({msg:'skill_5 is required'})
+       }
+        if(skill_5_percentage=== ''){
+           errors.push({msg:'skill_5_percentage is required'})
+       }
+        if(skill_6=== ''){
+           errors.push({msg:'skill_6 is required'})
+       }
+        if(skill_6_percentage=== ''){
+           errors.push({msg:'skill_6_percentage is required'})
+       }
+        if(skill_7=== ''){
+           errors.push({msg:'skill_7 is required'})
+       }
+        if(skill_7_percentage=== ''){
+           errors.push({msg:'skill_7_percentage is required'})
+       }
+        if(skill_8=== ''){
+           errors.push({msg:'skill_8 is required'})
+       }
+        if(skill_8_percentage=== ''){
+           errors.push({msg:'skill_8_percentage is required'})
+       }
