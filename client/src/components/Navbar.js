@@ -10,7 +10,7 @@ const Navbar = () => {
         localStorage.removeItem('myToken');
         dispatch({ type: LOGOUT });
     };
-    const Links = user ? (
+    const Links = user  ? (
         <>
             <li className="nav-item px-3 active">
                 <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
@@ -30,10 +30,14 @@ const Navbar = () => {
                 Profile
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+               {
+                   <>
                     <Link class="dropdown-item" to="/createprofile">Create Profile</Link>
                     <a class="dropdown-item" href="#">Edit Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Settings</a>
+                    </>
+                }
                 </div>
             </li>
             <li className="nav-item px-3">

@@ -1,6 +1,7 @@
 const formidable = require('formidable');
 const { uuid } = require('uuidv4');
 const fs= require('fs');
+const Post = require("../models/Post")
 module.exports.createProfile = (req, res) => {
     const form = formidable({ multiples: true });
     form.parse(req, async (error, fields, files) => {
@@ -68,7 +69,7 @@ module.exports.createProfile = (req, res) => {
             skill_7,
             skill_7_percentage,
             skill_8,
-            skill_8_percentage, user } = fields;
+            skill_8_percentage, user, id } = fields;
         const errors = [];
         
         if (name === '') {
@@ -276,7 +277,85 @@ module.exports.createProfile = (req, res) => {
                 const newPath = __dirname + `/../client/public/images/${files.image.name}`;
                 fs.copyFile(files.image.path, newPath, async (error) => {
                     if (!error) {
-                       console.log('image uploaded');
+                      try {
+                          const response = await Post.create({
+                            image : files.image.name ,
+                            name,
+                            email ,
+                            phone,
+                            age,
+                            address ,
+                            city ,
+                            user_state ,
+                            zipcode ,
+                            hobby ,
+                     school_name,
+                     subject_name,
+                     passing_year,
+                     school_aggregate,
+                     college_name,
+                     college_course,
+                     college_branch,
+                     college_passing_year,
+                     college_aggregate,
+                     Degree_college_name,
+                     Degree_college_course,
+                     Degree_college_branch,
+                     Degree_college_passing_year,
+                     Degree_college_aggregate,
+                     Instiute_name,
+                     Instiute_course,
+                     Instiute_branch,
+                     Instiute_passing_year,
+                     Instiute_aggregate,
+                     first_project_name,
+                     first_project_start_date,
+                     first_project_end_date,
+                     first_project_desription,
+                     first_project_key_technologies,
+                     second_project_name,
+                     second_project_start_date,
+                     second_project_end_date,
+                     second_project_desription,
+                     second_project_key_technologies,
+                     third_project_name,
+                     third_project_start_date,
+                     third_project_end_date,
+                     third_project_desription,
+                     third_project_key_technologies,
+                     fourth_project_name,
+                     fourth_project_start_date,
+                     fourth_project_end_date,
+                     fourth_project_desription,
+                     fourth_project_key_technologies,
+                     skill_1,
+                     skill_1_percentage,
+                     skill_2,
+                     skill_2_percentage,
+                     skill_3,
+                     skill_3_percentage,
+                     skill_4,
+                     skill_4_percentage,
+                     skill_5,
+                     skill_5_percentage,
+                     skill_6,
+                     skill_6_percentage,
+                     skill_7,
+                     skill_7_percentage,
+                     skill_8,
+                     skill_8_percentage,
+                     userId : id,
+                     
+                     
+                     
+                          });
+                          return res.status(200).json({msg: ' Your Profile Created Succesfully', response,} )
+                          
+                      } catch (error) {
+                          
+                        return res.status(500).json({errors: error, msg: error.message})
+                          
+                      }
                     }
                 });
 			}
@@ -285,4 +364,8 @@ module.exports.createProfile = (req, res) => {
 			return res.status(400).json({ errors, files });
 		} 
     });
+};
+
+module.exports.fetchProfile =(req,res) => {
+
 };

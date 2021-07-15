@@ -18,27 +18,28 @@ import {
 	SET_DETAILS,
 	
 } from '../types/PostTypes';
-const token = localStorage.getItem('myToken');
+
 export const createAction = (postData) => {
-    return async(dispatch)=>{
+    return async(dispatch,getState)=>{
+		const {
+			AuthReducer: { token },
+		} = getState();
 		dispatch({type: SET_LOADER});
         try {
             const config = {
 				headers: {
 					Authorization: `Bearer ${token}`, //jwt Format Bearer
 				},
-				// onUploadProgress: (data) => {
-
-				// 	console.log(
-				// 		'Your image upload progress: ',
-				// 		Math.round((100 * data.loaded) / data.total)
-				// 	);
-				// },
+				
 			};
 
-            const { data } = await axios.post('/create_profile',postData,config);
-			dispatch({type: CLOSE_LOADER});
-            console.log(data);
+            const { data : { msg },
+		} = await axios.post('/create_profile',postData,config);
+			dispatch({ type: CLOSE_LOADER });
+			dispatch({type: REMOVE_ERRORS})
+			dispatch({type: REDIRECT_TRUE});
+			dispatch({type: SET_MESSAGE, payload: msg });
+          
 
             
         } catch (error) {

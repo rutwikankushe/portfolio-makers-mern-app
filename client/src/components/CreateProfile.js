@@ -4,17 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import {createAction} from '../store/asyncMethods/PostMethods';
-export const CreateProfile = () => {
-   
+export const CreateProfile = (props) => {
+    const { createErrors, redirect } = useSelector(
+		(state) => state.PostReducer
+	);
     const [currentImage, setCurrentImage] = useState('Choose image');
     const [imagePreview, setImagePreview] = useState('');
     const dispatch = useDispatch();
     const {
-		user: { _id, email },
+        user: { _id, email },
 	} = useSelector((state) => state.AuthReducer);
+
+   
     
     const fileHandle = (e) => {
-
+        if(e.target.files.length !== 0)
+        {
         setCurrentImage(e.target.files[0].name);
         setState({
             ...state,
@@ -25,6 +30,7 @@ export const CreateProfile = () => {
             setImagePreview(reader.result);
         };
         reader.readAsDataURL(e.target.files[0]);
+    }
     };
     const handleInputs = (e) => {
 		setState({
@@ -36,7 +42,6 @@ export const CreateProfile = () => {
     const [state, setState] = useState({
         image: '',
         name: '',
-        email: '',
         phone: '',
         age: '',
         address: '',
@@ -114,7 +119,6 @@ export const CreateProfile = () => {
 		e.preventDefault();
         const {image,
             name,
-            email,
             phone,
             age,
             address,
@@ -186,7 +190,7 @@ export const CreateProfile = () => {
         formData.append('age',age);
         formData.append('address',address);
         formData.append('city',city);
-        formData.append('state',state);
+        formData.append('user_state',user_state);
         formData.append('zipcode',zipcode);
         formData.append('hobby',hobby);
         formData.append('school_name',school_name);
@@ -244,10 +248,18 @@ export const CreateProfile = () => {
         formData.append('skill_7_percentage',skill_7_percentage);
         formData.append('skill_8',skill_8);
         formData.append('skill_8_percentage',skill_8_percentage);
+        formData.append('id', _id);
 		dispatch(createAction(formData));
 		
 	};
-
+    useEffect(() => {
+		if (redirect) {
+			props.history.push('/dashboard');
+		}
+		if (createErrors.length !== 0) {
+			createErrors.map((err) => toast.error(err.msg));
+		}
+	}, [createErrors, redirect]);
     return (
         < >
         {/* https://i.ibb.co/0rQt7rD/1.png */}
@@ -256,6 +268,15 @@ export const CreateProfile = () => {
                 <meta name='description' content="Portfolio Maker Free" ></meta>
             </Helmet>
             <div className="container emp-profile">
+            <Toaster
+                    position="top-right"
+                    reverseOrder={false}
+                    toastOptions={{
+                        style:{
+                            fontSize:'10px',
+                        }
+                    }}
+                />
                 <form onSubmit={createProfile}>
                     <div className="row">
                         <div className="col-md-4">
@@ -296,17 +317,17 @@ export const CreateProfile = () => {
                                         </div>
 
                                         <div class="form-group col-md-6">
-                                            <label for="inputEmail4">Phone</label>
-                                            <input type="text" name="phone" class="form-control" value={state.phone} onChange={handleInputs} id="phone" placeholder="Phone"  />
+                                            <label for="inputEmail4"></label>
+                                            <input type="text" name="phone" class="form-control" value={state.phone} onChange={handleInputs} id="phone" placeholder=""  />
                                         </div>
 
                                         <div class="form-group col-md-6">
                                             <label for="inputEmail4">Email</label>
-                                            <input type="email" name="email" class="form-control" value={state.email} onChange={handleInputs} id="inputEmail4"  placeholder="Email" readOnly />
+                                            <input type="email" name="email" class="form-control" value={email} onChange={handleInputs} id="inputEmail4"  placeholder="Email" readOnly />
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="inputAge">Age</label>
-                                            <input type="password" name="age" class="form-control" value={state.age} onChange={handleInputs} id="inputAge" placeholder="Age" />
+                                            <input type="text" name="age" class="form-control" value={state.age} onChange={handleInputs} id="inputAge" placeholder="Age" />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -386,15 +407,15 @@ export const CreateProfile = () => {
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Branch </label>
-                                                <input type="text" name="college_branch" class="form-control" value={state.college_branch} onChange={handleInputs} id="phone" placeholder="Branch " />
+                                                <input type="text" name="college_branch" class="form-control" value={state.college_branch} onChange={handleInputs} id="" placeholder="Branch " />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Year </label>
-                                                <input type="text" name="college_passing_year" class="form-control" value={state.college_passing_year} onChange={handleInputs} id="phone" placeholder="Year " />
+                                                <input type="text" name="college_passing_year" class="form-control" value={state.college_passing_year} onChange={handleInputs} id="" placeholder="Year " />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Aggregate </label>
-                                                <input type="text" name="college_aggregate" class="form-control" value={state.college_aggregate} onChange={handleInputs} id="phone" placeholder="Aggregate " />
+                                                <input type="text" name="college_aggregate" class="form-control" value={state.college_aggregate} onChange={handleInputs} id="" placeholder="Aggregate " />
                                             </div>
                                         </div>
 
@@ -412,19 +433,19 @@ export const CreateProfile = () => {
 
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Course Name</label>
-                                                <input type="text" name="Degree_college_course" class="form-control" value={state.Degree_college_course} onChange={handleInputs} id="phone" placeholder="Course Name" />
+                                                <input type="text" name="Degree_college_course" class="form-control" value={state.Degree_college_course} onChange={handleInputs} id="" placeholder="Course Name" />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Branch </label>
-                                                <input type="text" name="Degree_college_branch" class="form-control" value={state.Degree_college_branch} onChange={handleInputs} id="phone" placeholder="Branch " />
+                                                <input type="text" name="Degree_college_branch" class="form-control" value={state.Degree_college_branch} onChange={handleInputs} id="" placeholder="Branch " />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Year </label>
-                                                <input type="text" name="Degree_college_passing_year" class="form-control" value={state.Degree_college_passing_year} onChange={handleInputs} id="phone" placeholder="Year " />
+                                                <input type="text" name="Degree_college_passing_year" class="form-control" value={state.Degree_college_passing_year} onChange={handleInputs} id="" placeholder="Year " />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Aggregate </label>
-                                                <input type="text" name="Degree_college_aggregate" class="form-control" value={state.Degree_college_aggregate} onChange={handleInputs} id="phone" placeholder="Aggregate " />
+                                                <input type="text" name="Degree_college_aggregate" class="form-control" value={state.Degree_college_aggregate} onChange={handleInputs} id="" placeholder="Aggregate " />
                                             </div>
                                         </div>
 
@@ -442,19 +463,19 @@ export const CreateProfile = () => {
 
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Course Name</label>
-                                                <input type="text" name="Instiute_course" class="form-control" value={state.Instiute_course} onChange={handleInputs} id="phone" placeholder="Course Name" />
+                                                <input type="text" name="Instiute_course" class="form-control" value={state.Instiute_course} onChange={handleInputs} id="" placeholder="Course Name" />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Branch </label>
-                                                <input type="text" name="Instiute_branch" class="form-control" value={state.Instiute_branch} onChange={handleInputs} id="phone" placeholder="Branch " />
+                                                <input type="text" name="Instiute_branch" class="form-control" value={state.Instiute_branch} onChange={handleInputs} id="" placeholder="Branch " />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Year </label>
-                                                <input type="text" name="Instiute_passing_year" class="form-control" value={state.Instiute_passing_year} onChange={handleInputs} id="phone" placeholder="Year " />
+                                                <input type="text" name="Instiute_passing_year" class="form-control" value={state.Instiute_passing_year} onChange={handleInputs} id="" placeholder="Year " />
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Aggregate </label>
-                                                <input type="text" name="Instiute_aggregate" class="form-control" value={state.Instiute_aggregate} onChange={handleInputs} id="phone" placeholder="Aggregate " />
+                                                <input type="text" name="Instiute_aggregate" class="form-control" value={state.Instiute_aggregate} onChange={handleInputs} id="" placeholder="Aggregate " />
                                             </div>
                                         </div>
 
@@ -487,7 +508,7 @@ export const CreateProfile = () => {
 
                                             <div class="form-group col-md-12">
                                                 <label for="inputEmail4">Description</label>
-                                                <textarea type="text" name="first_project_desription" class="form-control" value={state.first_project_desription} onChange={handleInputs} id="phone" placeholder="Description" />
+                                                <textarea type="text" name="first_project_desription" class="form-control" value={state.first_project_desription} onChange={handleInputs} id="" placeholder="Description" />
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="inputAge">key Technologies Used</label>
@@ -517,7 +538,7 @@ export const CreateProfile = () => {
 
                                             <div class="form-group col-md-12">
                                                 <label for="inputEmail4">Description</label>
-                                                <textarea type="text" name="second_project_desription" class="form-control" value={state.second_project_desription} onChange={handleInputs} id="phone" placeholder="Description" />
+                                                <textarea type="text" name="second_project_desription" class="form-control" value={state.second_project_desription} onChange={handleInputs} id="" placeholder="Description" />
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="inputAge">key Technologies Used</label>
@@ -547,7 +568,7 @@ export const CreateProfile = () => {
 
                                             <div class="form-group col-md-12">
                                                 <label for="inputEmail4">Description</label>
-                                                <textarea type="text" name="third_project_desription" class="form-control" value={state.third_project_desription} onChange={handleInputs} id="phone" placeholder="Description" />
+                                                <textarea type="text" name="third_project_desription" class="form-control" value={state.third_project_desription} onChange={handleInputs} id="" placeholder="Description" />
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="inputAge">key Technologies Used</label>
@@ -577,7 +598,7 @@ export const CreateProfile = () => {
 
                                             <div class="form-group col-md-12">
                                                 <label for="inputEmail4">Description</label>
-                                                <textarea type="text" name="fourth_project_desription" class="form-control" value={state.fourth_project_desription} onChange={handleInputs} id="phone" placeholder="Description" />
+                                                <textarea type="text" name="fourth_project_desription" class="form-control" value={state.fourth_project_desription} onChange={handleInputs} id="" placeholder="Description" />
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="inputAge">key Technologies Used</label>
